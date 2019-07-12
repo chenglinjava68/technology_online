@@ -16,7 +16,7 @@
       <el-checkbox class="remenber" v-model="checked">记住密码</el-checkbox>
       <el-form-item style="width:100%;">
         <el-button type="primary" style="width:65%;">登陆</el-button>
-        <el-button style="width:25%;" @click="">注册</el-button>
+        <el-button style="width:25%;" @click="goRegister">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -36,6 +36,11 @@
           url:require("../assets/logo.png"),
         }
       },
+      methods: {
+        goRegister: function () {
+          this.$router.push({name:'Register'})
+        }
+      }
     }
 </script>
 
