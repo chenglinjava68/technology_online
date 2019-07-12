@@ -37,5 +37,5 @@ yarn-error.log*
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+back_sprinboot/build/
 
