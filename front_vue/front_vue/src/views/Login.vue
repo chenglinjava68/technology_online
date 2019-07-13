@@ -27,13 +27,13 @@
       name: "Login",
       data(){
         return{
+          url:require("../assets/logo.png"),
           labelPosition: 'left',
           checked: false,
           user: {
             username: '',
             password: '',
           },
-          url:require("../assets/logo.png"),
         }
       },
       methods: {
