@@ -1,14 +1,10 @@
 <template>
   <div class="login-container">
-    <el-image :src="url">
-      <div slot="error" class="image-slot">
-        <i class="el-icon-picture-outline"></i>
-      </div>
-    </el-image>
+    <Logo/>
     <el-form class="login-page">
       <h3 class="title">系统登录</h3>
       <el-form-item>
-        <el-input v-model="user.username" placeholder="用户名"></el-input>
+        <el-input v-model="user.userName" placeholder="用户名"></el-input>
       </el-form-item>
       <el-form-item>
         <el-input type="password" v-model="user.password" placeholder="密码"></el-input>
@@ -23,25 +19,29 @@
 </template>
 
 <script>
-    export default {
-      name: "Login",
-      data(){
-        return{
-          url:require("../assets/logo.png"),
-          labelPosition: 'left',
-          checked: false,
-          user: {
-            username: '',
-            password: '',
-          },
-        }
-      },
-      methods: {
-        goRegister: function () {
-          this.$router.push({name:'Register'})
-        }
+  import Logo from '@/components/logo'
+  export default {
+    name: "Login",
+    components:{
+      Logo,
+    },
+    data(){
+      return{
+        url:require("../assets/logo.png"),
+        labelPosition: 'left',
+        checked: false,
+        user: {
+          userName: '',
+          password: '',
+        },
+      }
+    },
+    methods: {
+      goRegister: function () {
+        this.$router.push({name:'Register'})
       }
     }
+  }
 </script>
 
 <style scoped>
