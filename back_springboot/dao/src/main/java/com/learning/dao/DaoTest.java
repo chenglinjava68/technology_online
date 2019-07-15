@@ -1,5 +1,5 @@
 package com.learning.dao;
-import com.learning.entity.EntityTest;
+import com.learning.model.EntityTest;
 
 public class DaoTest {
     public String showDao() {
