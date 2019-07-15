@@ -3,7 +3,18 @@
     <Logo/>
     <el-form class="register-page" label-width="80px" :model="user" :rules="rules" ref="user">
       <h3 class="title">用户注册</h3>
-      <img  :src="user.picUrl" class="avatar">
+      <el-form-item label="用户头像">
+        <el-upload
+          class="avatar-uploader"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-change="imgPreview"
+          :auto-upload="false">
+          <img v-if="user.picUrl" :src="user.picUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </el-form-item>
       <el-form-item label="用户名" prop="userName">
         <el-input v-model="user.userName"/>
       </el-form-item>
@@ -98,7 +109,16 @@
     methods: {
       goBack: function () {
         this.$router.go(-1)
-      }
+      },
+      imgPreview (file, fileList) {
+        let fileName = file.name;
+        let regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test(fileName.toLowerCase())) {
+          this.user.picUrl = URL.createObjectURL(file.raw);
+        } else {
+          this.$message.error('请选择图片文件');
+        }
+      },
     }
   }
 </script>
@@ -119,10 +139,19 @@
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
   }
-  .avatar{
-    width: 100px;
-    height: 100px;
-    border-radius:50%;
-    margin: 10px auto;
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+  }
+  .avatar {
+    width: 90px;
+    height: 90px;
+    display: block;
+    border-radius: 50%;
   }
 </style>
