@@ -3,7 +3,6 @@ import com.learning.dao.UserDao;
 import com.learning.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -21,4 +20,7 @@ public class UserService {
         return userDao.getUserByID(id);
     }
 
+    public void newUser(User p){
+        userDao.newUser(p);
+    }
 }

@@ -9,10 +9,19 @@
 
     <!-- id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
     <!-- 查询所有   -->
-    <select id="getAll" resultType="com.ljsh.test.model.Person">
+    <select id="getAll" resultType="com.learning.model.User">
         SELECT
         *
         FROM
         <include refid="table" />
     </select>
+
+    <!-- 增 -->
+    <insert id="newp" parameterType="com.learning.model.User">
+        INSERT INTO
+        <include refid="table"/>
+        (name,password)
+        VALUES
+        (#{name},#{password})
+    </insert>
 </mapper>

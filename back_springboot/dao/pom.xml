@@ -50,7 +50,7 @@
         <!-- 引用entity -->
         <dependency>
             <groupId>com.learning</groupId>
-            <artifactId>entity</artifactId>
+            <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -28,7 +28,7 @@
         <module>model</module>
         <module>dao</module>
         <module>service</module>
-        <module>web</module>
+        <module>controller</module>
     </modules>
     <!-- 引用 -->
     <dependencies>
