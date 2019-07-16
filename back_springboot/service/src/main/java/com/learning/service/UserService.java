@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
+@Service("UserService")
 public class UserService {
     @Autowired
     UserDao userDao;
@@ -20,7 +20,7 @@ public class UserService {
         return userDao.getUserByID(id);
     }
 
-    public void newUser(User p){
-        userDao.newUser(p);
+    public void newUser(User user){
+        userDao.newUser(user);
     }
 }

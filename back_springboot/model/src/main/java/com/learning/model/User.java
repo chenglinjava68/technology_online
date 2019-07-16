@@ -5,6 +5,7 @@ public class User {
             {id} 自增主键
             {userName} 用户姓名
             {userNickName} 用户昵称
+            {password} 用户密码
             {userMail} 用户邮箱
             {userPhone} 用户电话
             {userPower} 用户权限
@@ -13,6 +14,7 @@ public class User {
     private int id;
     private String userName;
     private String userNickName;
+    private String password;
     private String userMail;
     private String userPhone;
     private int userPower;
@@ -42,6 +44,14 @@ public class User {
         this.userNickName = userNickName;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getUserMail() {
         return userMail;
     }
@@ -66,7 +76,7 @@ public class User {
         this.userPower = userPower;
     }
 
-    public boolean isUserStatus() {
+    public boolean getUserStatus() {
         return userStatus;
     }
 
@@ -80,6 +90,7 @@ public class User {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", userNickName='" + userNickName + '\'' +
+                ", password='" + password + '\'' +
                 ", userMail='" + userMail + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", userPower=" + userPower +

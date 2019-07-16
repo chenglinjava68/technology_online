@@ -17,11 +17,11 @@
     </select>
 
     <!-- 增 -->
-    <insert id="newp" parameterType="com.learning.model.User">
+    <insert id="newUser" parameterType="com.learning.model.User">
         INSERT INTO
         <include refid="table"/>
-        (name,password)
+        (user_name,user_nick_name,password,user_mail,user_phone,user_power,user_status)
         VALUES
-        (#{name},#{password})
+        (#{userName},#{userNickName},#{password},#{userMail},#{userPhone},#{userPower},#{userStatus})
     </insert>
 </mapper>

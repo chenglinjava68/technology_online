@@ -1,7 +1,6 @@
 package com.learning.controller;
 
 import com.learning.model.User;
-import com.learning.service.ServiceTest;
 import com.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,18 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+@RestController("UserController")
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/register")
+    @PostMapping("/registerUser")
     @CrossOrigin
-    public Object submitUser(User user) {
+    public Object registerUser(User user) {
         Map<String,Object> result = new HashMap<String, Object>();
         try {
             if(user.getId()==0) {
+                user.setUserPower(1);
+                user.setUserStatus(true);
                 userService.newUser(user);
                 result.put("success", true);
             }else{

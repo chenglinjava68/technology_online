@@ -1,9 +1,12 @@
 package com.learning.dao;
 import com.learning.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Mapper
+@Repository("UserDao")
 public interface UserDao {
     /*
    查所有
@@ -31,6 +34,6 @@ public interface UserDao {
     增加
     {p} 要新增的User实例
      */
-    void newUser(User p);
+    void newUser(User user);
 }
 
