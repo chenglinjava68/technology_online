@@ -1,7 +1,13 @@
 <template>
   <div class="register-container">
     <Logo/>
-    <el-form class="register-page" label-width="80px" :model="user" :rules="rules" ref="user">
+    <el-form
+      class="register-page"
+      label-width="80px"
+      :model="user"
+      :rules="rules"
+      ref="user"
+      v-loading="loading">
       <h3 class="title">用户注册</h3>
       <el-form-item label="用户头像">
         <el-upload
@@ -18,8 +24,8 @@
       <el-form-item label="用户名" prop="userName">
         <el-input v-model="user.userName"/>
       </el-form-item>
-      <el-form-item label="昵称" prop="nickName">
-        <el-input v-model="user.nickName"/>
+      <el-form-item label="昵称" prop="userNickName">
+        <el-input v-model="user.userNickName"/>
       </el-form-item>
       <el-form-item label="密码" prop="password" required>
         <el-input type="password" v-model="user.password"/>
@@ -34,7 +40,7 @@
         <el-input v-model="user.userPhone"/>
       </el-form-item>
       <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:65%;">注册</el-button>
+        <el-button type="primary" style="width:65%;" @click.native="registerUser">注册</el-button>
         <el-button style="width:25%;" @click="goBack">返回</el-button>
       </el-form-item>
     </el-form>
@@ -71,20 +77,21 @@
       return{
         user: {
           userName: '',
-          nickName: '',
+          userNickName: '',
           password: '',
           rePassword: '',
           userMail: '',
           userPhone: '',
           picUrl:'',
         },
+        loading: false,
         rules:{
           userName: [
             { required: true, message: '请输入用户名称', trigger: 'blur' },
             { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' },
             { pattern: /^[a-zA-Z0-9_]+$/, message: '请输入合法的字符' }
           ],
-          nickName: [
+          userNickName: [
             { required: true, message: '请输入用户昵称', trigger: 'blur' },
             { min: 3, max: 30, message: '长度在 3 到 30 个字符', trigger: 'blur' },
             { pattern: /^[\u4e00-\u9fa5a-z0-9_]+$/, message: '请输入合法的字符' }
@@ -119,6 +126,29 @@
           this.$message.error('请选择图片文件');
         }
       },
+      registerUser(){
+        this.$refs.user.validate((valid) => {
+          //代表通过验证 ,将参数传回后台
+          if (valid){
+            this.loading=true;
+            let params = Object.assign({}, this.user);
+            this.$post("/user/registerUser",params)
+              .then((result) => {
+                if (result.success) {
+                  this.$message.success(result.message);
+                  this.$router.push({name:'Login'})
+                }else{
+                  this.$message.error(result.message);
+                }
+                this.loading=false;
+              })
+              .catch((error) => {
+                this.$message.error("后端异常，请联系管理员");
+                this.loading=false;
+              });
+            }
+        });
+      }
     }
   }
 </script>
