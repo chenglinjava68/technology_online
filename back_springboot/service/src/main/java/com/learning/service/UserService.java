@@ -19,7 +19,12 @@ public class UserService {
     public User getUserByID(int id){
         return userDao.getUserByID(id);
     }
-
+    public int getUserByName(String userName){
+        return userDao.getUserByName(userName);
+    }
+    public int getUserByNickName(String userNickName){
+        return userDao.getUserByNickName(userNickName);
+    }
     public void newUser(User user){
         userDao.newUser(user);
     }

@@ -22,18 +22,26 @@ public class UserController {
     public Object registerUser(User user) {
         Map<String,Object> result = new HashMap<String, Object>();
         try {
-            if(user.getId()==0) {
+            if (userService.getUserByName(user.getUserName())!=0){
+                result.put("success", false);
+                result.put("message", "用户名已存在");
+                return result;
+            }else if(userService.getUserByNickName(user.getUserNickName())!=0){
+                result.put("success", false);
+                result.put("message", "用户昵称已存在");
+                return result;
+            }else {
                 user.setUserPower(1);
                 user.setUserStatus(true);
                 userService.newUser(user);
                 result.put("success", true);
-            }else{
-                result.put("false", false);
+                result.put("message", "新增用户成功");
+                return result;
             }
-            return result;
         }
         catch (Exception e){
-            result.put("false", false);
+            result.put("success", false);
+            result.put("message", "用户新增异常，请稍后重试");
             return result;
         }
     }

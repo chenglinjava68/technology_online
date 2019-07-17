@@ -19,20 +19,28 @@ public interface UserDao {
      */
     User getUserByID(int id);
     /*
+    根据用户名查询数量
+    {userName} 要查询用户的 userName
+     */
+    int getUserByName(String userName);
+    /*
+    根据用户昵称查询数量
+    {userNickName} 要查询用户的 userNickName
+     */
+    int getUserByNickName(String userNickName);
+    /*
     删除
     {id} 要删除用户的 id
      */
     void delete(int id);
-
     /*
     更新
-    {p} 要更新的User实例
+    {user} 要更新的User实例
      */
-    void updateUser(User p);
-
+    void updateUser(User user);
     /*
     增加
-    {p} 要新增的User实例
+    {user} 要新增的User实例
      */
     void newUser(User user);
 }

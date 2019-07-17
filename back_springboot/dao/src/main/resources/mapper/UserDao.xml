@@ -16,6 +16,30 @@
         <include refid="table" />
     </select>
 
+    <!-- 根据用户名查询 -->
+    <select id="getUserByName" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        <include refid="table"/>
+        WHERE
+        user_name = #{userName}
+        AND
+        user_status = 1
+    </select>
+
+    <!-- 根据用户名查询 -->
+    <select id="getUserByNickName" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM
+        <include refid="table"/>
+        WHERE
+        user_nick_name = #{userNickName}
+        AND
+        user_status = 1
+    </select>
+
     <!-- 增 -->
     <insert id="newUser" parameterType="com.learning.model.User">
         INSERT INTO
