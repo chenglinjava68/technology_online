@@ -9,6 +9,7 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserDao userDao;
+    EncodeAndDecode encodeAndDecode;
     /*
         Service层介于controller和dao之间作为服务层进行一些逻辑处理，
         这里逻辑太简单所以知识单纯调用dao所以不做注释
@@ -26,6 +27,7 @@ public class UserService {
         return userDao.getUserByNickName(userNickName);
     }
     public void newUser(User user){
+        user.setPassword(encodeAndDecode.AESEncode(user.getPassword()));
         userDao.newUser(user);
     }
 }
