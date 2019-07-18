@@ -16,6 +16,18 @@
         <include refid="table" />
     </select>
 
+    <!-- 查询所有   -->
+    <select id="checkUser" resultType="com.learning.model.User">
+        SELECT
+        *
+        FROM
+        <include refid="table" />
+        WHERE
+        user_name = #{userName}
+        AND
+        password = #{password}
+    </select>
+
     <!-- 根据用户名查询 -->
     <select id="getUserByName" resultType="java.lang.Integer">
         SELECT
@@ -24,11 +36,9 @@
         <include refid="table"/>
         WHERE
         user_name = #{userName}
-        AND
-        user_status = 1
     </select>
 
-    <!-- 根据用户名查询 -->
+    <!-- 根据用户昵称查询 -->
     <select id="getUserByNickName" resultType="java.lang.Integer">
         SELECT
         count(*)
@@ -36,8 +46,6 @@
         <include refid="table"/>
         WHERE
         user_nick_name = #{userNickName}
-        AND
-        user_status = 1
     </select>
 
     <!-- 增 -->

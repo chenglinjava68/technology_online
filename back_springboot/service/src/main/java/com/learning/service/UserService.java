@@ -20,12 +20,19 @@ public class UserService {
     public User getUserByID(int id){
         return userDao.getUserByID(id);
     }
+    //检查用户名是否存在
     public int getUserByName(String userName){
         return userDao.getUserByName(userName);
     }
+    //检查用户昵称是否存在
     public int getUserByNickName(String userNickName){
         return userDao.getUserByNickName(userNickName);
     }
+    public User checkUser(String userName,String password){
+        password = encodeAndDecode.AESEncode(password);
+        return userDao.checkUser(userName,password);
+    }
+    //新增用户
     public void newUser(User user){
         user.setPassword(encodeAndDecode.AESEncode(user.getPassword()));
         userDao.newUser(user);

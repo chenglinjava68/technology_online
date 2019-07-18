@@ -53,4 +53,10 @@ public class UserController {
             }
         }
     }
+
+    @PostMapping("/Login")
+    @CrossOrigin
+    public Object Login(@Validated User user, BindingResult bindingResult) {
+
+    }
 }

@@ -19,6 +19,12 @@ public interface UserDao {
      */
     User getUserByID(int id);
     /*
+    根据用户名和密码查询
+    {userName} 要查询用户的名称
+    {password} 要查询用户的密码
+     */
+    User checkUser(String userName,String password);
+    /*
     根据用户名查询数量
     {userName} 要查询用户的 userName
      */
@@ -29,6 +35,11 @@ public interface UserDao {
      */
     int getUserByNickName(String userNickName);
     /*
+    增加用户
+    {user} 要新增的User实例
+     */
+    void newUser(User user);
+    /*
     删除
     {id} 要删除用户的 id
      */
@@ -38,10 +49,5 @@ public interface UserDao {
     {user} 要更新的User实例
      */
     void updateUser(User user);
-    /*
-    增加
-    {user} 要新增的User实例
-     */
-    void newUser(User user);
 }
 
