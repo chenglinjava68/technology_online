@@ -1,5 +1,12 @@
 package com.learning.model;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class User {
     /*
             {id} 自增主键
@@ -12,10 +19,20 @@ public class User {
             {userStatus} 用户状态
          */
     private int id;
+    @NotNull(message = "用户名不能为空")
+    @Length(min = 3, max = 15, message = "姓名必须在3到15位之间")
+    @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "用户名存在非法的字符")
     private String userName;
+    @NotNull(message = "用户昵称不能为空")
+    @Length(min = 3, max = 30, message = "姓名必须在3到30位之间")
+    @Pattern(regexp = "^[\u4e00-\u9fa5a-z0-9_]+$", message = "用户昵称存在非法的字符")
     private String userNickName;
+    @NotNull(message = "密码不能为空")
     private String password;
+    @NotNull(message = "邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
     private String userMail;
+    @Pattern(regexp = "^1(3|4|5|6|7|8|9)\\d{9}$", message = "请输入正确的手机号")
     private String userPhone;
     private int userPower;
     private boolean userStatus;
