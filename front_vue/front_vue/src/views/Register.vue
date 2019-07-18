@@ -107,8 +107,7 @@
             { pattern: /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/, message: '请输入合法的邮箱' }
           ],
           userPhone: [
-            { required: true, message: '请输入用户电话', trigger: 'blur' },
-            { pattern: /^1(3|4|5|6|7|8|9)\d{9}$/, message: '请输入合法的电话号' }
+            { pattern: /^1(3|4|5|6|7|8|9)\d{9}$/, message: '请输入合法的电话号'}
           ],
         },
       };
@@ -120,7 +119,7 @@
       imgPreview (file, fileList) {
         let fileName = file.name;
         let regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
-        if (regex.test(fileName.toLowerCase())) {
+        if (regex.test(fileName.toLowerCase ())) {
           this.user.picUrl = URL.createObjectURL(file.raw);
         } else {
           this.$message.error('请选择图片文件');
