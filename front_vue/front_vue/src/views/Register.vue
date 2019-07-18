@@ -1,49 +1,59 @@
 <template>
   <div class="register-container">
-    <Logo/>
-    <el-form
-      class="register-page"
-      label-width="80px"
-      :model="user"
-      :rules="rules"
-      ref="user"
-      v-loading="loading">
-      <h3 class="title">用户注册</h3>
-      <el-form-item label="用户头像">
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-change="imgPreview"
-          :auto-upload="false">
-          <img v-if="user.picUrl" :src="user.picUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload>
-      </el-form-item>
-      <el-form-item label="用户名" prop="userName">
-        <el-input v-model="user.userName"/>
-      </el-form-item>
-      <el-form-item label="昵称" prop="userNickName">
-        <el-input v-model="user.userNickName"/>
-      </el-form-item>
-      <el-form-item label="密码" prop="password" required>
-        <el-input type="password" v-model="user.password"/>
-      </el-form-item>
-      <el-form-item label="确认密码" prop="rePassword">
-        <el-input type="password" v-model="user.rePassword"/>
-      </el-form-item>
-      <el-form-item label="邮箱" prop="userMail">
-        <el-input v-model="user.userMail"/>
-      </el-form-item>
-      <el-form-item label="电话" prop="userPhone">
-        <el-input v-model="user.userPhone"/>
-      </el-form-item>
-      <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:65%;" @click.native="registerUser">注册</el-button>
-        <el-button style="width:25%;" @click="goBack">返回</el-button>
-      </el-form-item>
-    </el-form>
+    <div class="ms-register">
+      <Logo/>
+      <div class="background">
+        <h3 class="title">用户注册</h3>
+        <el-form class="ms-content" :model="user" :rules="rules" ref="user" v-loading="loading">
+          <el-form-item>
+            <el-upload
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-change="imgPreview"
+              :auto-upload="false">
+              <img v-if="user.picUrl" :src="user.picUrl" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            </el-upload>
+          </el-form-item>
+          <el-form-item prop="userName">
+            <el-input v-model="user.userName" placeholder="用户名">
+              <el-button slot="prepend" icon="el-icon-user" ></el-button>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="userNickName">
+            <el-input v-model="user.userNickName" placeholder="昵称">
+              <el-button slot="prepend" icon="el-icon-postcard" ></el-button>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="password" required>
+            <el-input type="password" v-model="user.password" placeholder="密码">
+              <el-button slot="prepend" icon="el-icon-key" ></el-button>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="rePassword">
+            <el-input type="password" v-model="user.rePassword" placeholder="确认密码">
+              <el-button slot="prepend" icon="el-icon-connection" ></el-button>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="userMail">
+            <el-input v-model="user.userMail" placeholder="邮箱">
+              <el-button slot="prepend" icon="el-icon-message" ></el-button>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="userPhone">
+            <el-input v-model="user.userPhone" placeholder="电话">
+              <el-button slot="prepend" icon="el-icon-phone" ></el-button>
+            </el-input>
+          </el-form-item>
+          <div class="login-btn">
+            <el-button type="primary" style="width:65%;" @click.native="registerUser">注册</el-button>
+            <el-button style="width:25%;" @click="goBack">返回</el-button>
+          </div>
+        </el-form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -156,19 +166,38 @@
   .register-container{
     width: 100%;
     height: 100%;
+    position:relative;
+    background-image: url(../assets/img/bg.png);
+    background-size: 100%;
+  }
+  .ms-register{
+    position: absolute;
+    left:45%;
+    top:25%;
+    width:500px;
+    text-align: center;
+    margin:-190px 0 0 -175px;
+    overflow: hidden;
+  }
+  .background{
+    background: rgba(255,255,255, 0.3);
+    border-radius: 5px;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  .ms-content{
+    padding: 30px 30px;
     text-align: center;
   }
-  .register-page {
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    margin: 30px auto;
-    width: 500px;
-    padding: 15px 35px 15px;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
+  .el-upload__tip{
+    color: #fff;
   }
-
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
@@ -182,5 +211,13 @@
     height: 90px;
     display: block;
     border-radius: 50%;
+  }
+  .login-btn{
+    text-align: center;
+  }
+  .login-btn button{
+    width:100%;
+    height:36px;
+    margin-bottom: 10px;
   }
 </style>
