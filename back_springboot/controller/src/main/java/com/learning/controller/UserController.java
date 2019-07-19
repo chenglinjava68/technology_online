@@ -69,7 +69,7 @@ public class UserController {
            }else {
                String Usertoken = JwtToken.sign(userName,password);
                result.put("success", true);
-               result.put("msg", "登录成功");
+               result.put("message", "登录成功");
                result.put("token", Usertoken);
            }
            return result;
