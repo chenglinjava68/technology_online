@@ -1,6 +1,7 @@
 package com.learning.controller;
 
 import com.learning.model.User;
+import com.learning.service.JwtToken;
 import com.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -56,7 +57,27 @@ public class UserController {
 
     @PostMapping("/Login")
     @CrossOrigin
-    public Object Login(@Validated User user, BindingResult bindingResult) {
-
+    public Object Login(User user) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+           String userName = user.getUserName();
+           String password = user.getPassword();
+           User userCheck = userService.checkUser(userName, password);
+           if (userCheck == null){
+               result.put("success", false);
+               result.put("message", "用户名或密码错误，如无错误，该用户或被注销，请重试");
+           }else {
+               String Usertoken = JwtToken.sign(userName,password);
+               result.put("success", true);
+               result.put("msg", "登录成功");
+               result.put("token", Usertoken);
+           }
+           return result;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            result.put("success", false);
+            result.put("message", "系统异常，请联系管理员");
+            return result;
+        }
     }
 }

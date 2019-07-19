@@ -26,6 +26,8 @@
         user_name = #{userName}
         AND
         password = #{password}
+        AND
+        user_status = 1
     </select>
 
     <!-- 根据用户名查询 -->

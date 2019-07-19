@@ -28,6 +28,7 @@ public class UserService {
     public int getUserByNickName(String userNickName){
         return userDao.getUserByNickName(userNickName);
     }
+    //检查用户名和密码是否匹配
     public User checkUser(String userName,String password){
         password = encodeAndDecode.AESEncode(password);
         return userDao.checkUser(userName,password);
