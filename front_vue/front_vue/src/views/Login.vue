@@ -17,7 +17,7 @@
           </el-form-item>
           <el-checkbox v-model="checked" class="remenber">记住密码</el-checkbox>
           <div class="login-btn">
-            <el-button type="primary" style="width:65%;">登陆</el-button>
+            <el-button type="primary" style="width:65%;" @click="Login">登陆</el-button>
             <el-button style="width:25%;" @click="goRegister">注册</el-button>
           </div>
         </el-form>
@@ -56,8 +56,33 @@
     methods: {
       goRegister: function () {
         this.$router.push({name:'Register'})
+      },
+      Login: function () {
+        this.$refs.user.validate((valid) => {
+          //代表通过验证 ,将参数传回后台
+          if (valid){
+            this.loading=true;
+            let params = Object.assign({}, this.user);
+            this.$post("/user/Login",params)
+              .then((result) => {
+                if (result.success) {
+                  this.$message.success(result.message);
+                  sessionStorage.setItem('token', result.token)
+                  sessionStorage.setItem('userName', user.userName)
+                  this.$router.push({name:'Login'})
+                }else{
+                  this.$message.error(result.message);
+                }
+                this.loading=false;
+              })
+              .catch((error) => {
+                this.$message.error("后端异常，请联系管理员");
+                this.loading=false;
+              });
+          }
+        });
       }
-    }
+    },
   }
 </script>
 
