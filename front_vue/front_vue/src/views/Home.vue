@@ -1,11 +1,17 @@
 <template>
-
+  <div class="home-container">
+    <vHead></vHead>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "Home"
-    }
+  import vHead from "./Header.vue"
+  export default {
+    name: "Home",
+    components:{
+      vHead,
+    },
+  }
 </script>
 
 <style scoped>
