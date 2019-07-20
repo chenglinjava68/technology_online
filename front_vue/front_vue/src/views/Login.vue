@@ -15,7 +15,6 @@
               <el-button slot="prepend" icon="el-icon-key" ></el-button>
             </el-input>
           </el-form-item>
-          <el-checkbox v-model="checked" class="remenber">记住密码</el-checkbox>
           <div class="login-btn">
             <el-button type="primary" style="width:65%;" @click="Login">登陆</el-button>
             <el-button style="width:25%;" @click="goRegister">注册</el-button>
@@ -37,7 +36,6 @@
       return{
         url:require("../assets/logo.png"),
         labelPosition: 'left',
-        checked: false,
         loading: false,
         user: {
           userName: '',
@@ -67,7 +65,7 @@
               .then((result) => {
                 if (result.success) {
                   this.$message.success(result.message);
-                  sessionStorage.setItem('token', result.token);
+                  sessionStorage.setItem('access-token', result.token);
                   sessionStorage.setItem('userName', this.user.userName);
                   this.$router.push({name:'Home'});
                 }else{
@@ -117,10 +115,6 @@
   .ms-content{
     padding: 30px 30px;
     text-align: center;
-  }
-  .remenber{
-    margin: 0px 0px 15px;
-    color: #fff;
   }
   .login-btn{
     text-align: center;

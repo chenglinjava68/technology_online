@@ -1,21 +1,22 @@
 <template>
   <div class="Nofound-container">
-    <el-image :src="url">
-      <div slot="error" class="image-slot">
-        <i class="el-icon-picture-outline"></i>
-      </div>
-    </el-image>
-    <h1>当前页面找不到了</h1>
-    <router-link :to="{ path: '/login' }"><span>回到主页</span></router-link>
+    <div class="error-code">4<span>0</span>4</div>
+    <div class="error-desc">啊哦~ 你所访问的页面不存在</div>
+    <div class="error-handle">
+      <router-link to="/">
+        <el-button type="primary" size="large">返回首页</el-button>
+      </router-link>
+      <el-button class="error-btn" type="primary" size="large" @click="goBack">返回上一页</el-button>
+    </div>
   </div>
 </template>
 
 <script>
     export default {
       name: "NoFound",
-      data(){
-        return{
-          url:require("../assets/logo.png")
+      methods:{
+        goBack:function () {
+          this.$router.go(-1)
         }
       }
     }
@@ -23,8 +24,33 @@
 
 <style scoped>
   .Nofound-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    text-align: center;
+    background: #f3f3f3;
+    box-sizing: border-box;
+  }
+  .error-code{
+    line-height: 1;
+    font-size: 250px;
+    font-weight: bolder;
+    color: #2d8cf0;
+  }
+  .error-code span{
+    color: #00a854;
+  }
+  .error-desc{
+    font-size: 30px;
+    color: #777;
+  }
+  .error-handle{
+    margin-top: 30px;
+    padding-bottom: 200px;
+  }
+  .error-btn{
+    margin-left: 100px;
   }
 </style>

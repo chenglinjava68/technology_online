@@ -14,6 +14,21 @@ Vue.prototype.$put=put;
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
+// //对每次访问之前都要先看是否已经登录
+// router.beforeEach((to,from,next)=>{
+//   if(to.path== '/login' || to.path== '/register'){
+//     sessionStorage.removeItem('access-token');
+//     next();
+//   }else {
+//     const token = sessionStorage.getItem('access-token');
+//     if(!token){
+//       next({path:'/login'});
+//     }else {
+//       next()
+//     }
+//   }
+// });
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

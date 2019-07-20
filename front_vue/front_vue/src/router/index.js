@@ -1,9 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/views/Login'
-import Register from '@/views/Register'
-import NotFound from '@/views/NoFound'
-import Home from '@/views/Home'
 
 Vue.use(Router)
 
@@ -19,21 +15,21 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: resolve => require(['@/views/Login.vue'], resolve)
     },
     {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: resolve => require(['@/views/Register.vue'], resolve)
     },
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: resolve => require(['@/views/Home.vue'], resolve)
     },
     {
       path:'*',
-      component : NotFound
+      component : resolve => require(['@/views/NoFound.vue'], resolve)
     },
   ]
 })
