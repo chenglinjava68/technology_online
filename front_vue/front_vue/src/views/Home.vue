@@ -1,15 +1,17 @@
 <template>
   <div class="home-container">
-    <vHead></vHead>
+    <vHeader></vHeader>
+    <vSideBar></vSideBar>
   </div>
 </template>
 
 <script>
-  import vHead from "./Header.vue"
+  import vHeader from "./Header.vue"
+  import vSideBar from './SideBar.vue';
   export default {
     name: "Home",
     components:{
-      vHead,
+      vHeader,vSideBar,
     },
   }
 </script>

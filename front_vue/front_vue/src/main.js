@@ -18,6 +18,7 @@ Vue.use(ElementUI);
 // router.beforeEach((to,from,next)=>{
 //   if(to.path== '/login' || to.path== '/register'){
 //     sessionStorage.removeItem('access-token');
+//     sessionStorage.removeItem('userName');
 //     next();
 //   }else {
 //     const token = sessionStorage.getItem('access-token');

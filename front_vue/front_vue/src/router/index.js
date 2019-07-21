@@ -25,7 +25,8 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: resolve => require(['@/views/Home.vue'], resolve)
+      component: resolve => require(['@/views/Home.vue'], resolve),
+      meta: { title: '基础平台' },
     },
     {
       path:'*',
