@@ -36,6 +36,9 @@ public class User {
     private String userPhone;
     private int userPower;
     private boolean userStatus;
+    private String picName;
+    private String userPicUrl;
+    private String userPicDelUrl;
 
     public int getId() {
         return id;
@@ -93,12 +96,36 @@ public class User {
         this.userPower = userPower;
     }
 
-    public boolean getUserStatus() {
+    public boolean isUserStatus() {
         return userStatus;
     }
 
     public void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getPicName() {
+        return picName;
+    }
+
+    public void setPicName(String picName) {
+        this.picName = picName;
+    }
+
+    public String getUserPicUrl() {
+        return userPicUrl;
+    }
+
+    public void setUserPicUrl(String userPicUrl) {
+        this.userPicUrl = userPicUrl;
+    }
+
+    public String getUserPicDelUrl() {
+        return userPicDelUrl;
+    }
+
+    public void setUserPicDelUrl(String userPicDelUrl) {
+        this.userPicDelUrl = userPicDelUrl;
     }
 
     @Override
@@ -112,6 +139,9 @@ public class User {
                 ", userPhone='" + userPhone + '\'' +
                 ", userPower=" + userPower +
                 ", userStatus=" + userStatus +
+                ", picName='" + picName + '\'' +
+                ", userPicUrl='" + userPicUrl + '\'' +
+                ", userPicDelUrl='" + userPicDelUrl + '\'' +
                 '}';
     }
 }

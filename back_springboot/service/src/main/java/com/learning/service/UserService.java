@@ -1,5 +1,4 @@
 package com.learning.service;
-import com.learning.dao.UserAvatarDao;
 import com.learning.dao.UserDao;
 import com.learning.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +17,21 @@ public class UserService {
     public List<User> getAll(){
         return userDao.getAll();
     }
-    public User getUserByID(String userName){
-        return userDao.getUserByID(userName);
-    }
-    //检查用户名是否存在
-    public int getUserByName(String userName){
+    public User getUserByName(String userName){
         return userDao.getUserByName(userName);
     }
+    //检查用户名是否存在
+    public int getUserNameCount(String userName){
+        return userDao.getUserNameCount(userName);
+    }
     //检查用户昵称是否存在
-    public int getUserByNickName(String userNickName){
-        return userDao.getUserByNickName(userNickName);
+    public int getUserNickNameCount(String userNickName){
+        return userDao.getUserNickNameCount(userNickName);
     }
     //检查用户名和密码是否匹配
-    public User checkUser(String userName,String password){
+    public User getUserByName(String userName,String password){
         password = encodeAndDecode.AESEncode(password);
-        return userDao.checkUser(userName,password);
+        return userDao.getUserByName(userName,password);
     }
     //新增用户
     public void newUser(User user){

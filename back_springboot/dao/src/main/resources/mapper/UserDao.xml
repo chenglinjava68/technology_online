@@ -7,31 +7,48 @@
     <!-- 这里是作为一个变量使用 -->
     <sql id="table">user</sql>
 
+    <resultMap type="com.learning.model.User" id="User">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_nick_name" property="userNickName"/>
+        <result column="password" property="password"/>
+        <result column="pic_name" property="picName"/>
+        <result column="user_pic_url" property="userPicUrl"/>
+        <result column="pic_del_url" property="userPicDelUrl"/>
+        <result column="user_mail" property="userMail"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_power" property="userPower"/>
+        <result column="user_status" property="userStatus"/>
+    </resultMap>
+
     <!-- id属性填写Dao文件里的函数名称 xxType是参数或是结果的类型根据情况填写 -->
     <!-- 查询所有   -->
-    <select id="getAll" resultType="com.learning.model.User">
+    <select id="getAll" resultMap="User">
         SELECT
         *
         FROM
         <include refid="table" />
     </select>
 
-    <!-- 查询所有   -->
-    <select id="checkUser" resultType="com.learning.model.User">
+    <!-- 登陆校验-->
+    <select id="getUserByName" resultMap="User">
         SELECT
         *
         FROM
         <include refid="table" />
         WHERE
         user_name = #{userName}
-        AND
-        password = #{password}
-        AND
-        user_status = 1
+        <if test="password != null">
+            AND
+            password = #{password}
+            AND
+            user_status = 1
+        </if>
+
     </select>
 
     <!-- 根据用户名查询 -->
-    <select id="getUserByName" resultType="java.lang.Integer">
+    <select id="getUserNameCount" resultType="java.lang.Integer">
         SELECT
         count(*)
         FROM
@@ -41,7 +58,7 @@
     </select>
 
     <!-- 根据用户昵称查询 -->
-    <select id="getUserByNickName" resultType="java.lang.Integer">
+    <select id="getUserNickNameCount" resultType="java.lang.Integer">
         SELECT
         count(*)
         FROM
@@ -54,8 +71,8 @@
     <insert id="newUser" parameterType="com.learning.model.User">
         INSERT INTO
         <include refid="table"/>
-        (user_name,user_nick_name,password,user_mail,user_phone,user_power,user_status)
+        (user_name,user_nick_name,password,pic_name,user_pic_url,pic_del_url,user_mail,user_phone,user_power,user_status)
         VALUES
-        (#{userName},#{userNickName},#{password},#{userMail},#{userPhone},#{userPower},#{userStatus})
+        (#{userName},#{userNickName},#{password},#{picName},#{userPicUrl},#{userPicDelUrl},#{userMail},#{userPhone},#{userPower},#{userStatus})
     </insert>
 </mapper>

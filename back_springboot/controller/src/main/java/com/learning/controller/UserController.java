@@ -31,11 +31,11 @@ public class UserController {
             return result;
         } else {
             try {
-                if (userService.getUserByName(user.getUserName()) != 0) {
+                if (userService.getUserNameCount(user.getUserName()) != 0) {
                     result.put("success", false);
                     result.put("message", "用户名已存在");
                     return result;
-                } else if (userService.getUserByNickName(user.getUserNickName()) != 0) {
+                } else if (userService.getUserNickNameCount(user.getUserNickName()) != 0) {
                     result.put("success", false);
                     result.put("message", "用户昵称已存在");
                     return result;
@@ -62,7 +62,7 @@ public class UserController {
         try {
            String userName = user.getUserName();
            String password = user.getPassword();
-           User userCheck = userService.checkUser(userName, password);
+           User userCheck = userService.getUserByName(userName, password);
            if (userCheck == null){
                result.put("success", false);
                result.put("message", "用户名或密码错误，如无错误，该用户或被注销，请重试");
@@ -74,7 +74,6 @@ public class UserController {
            }
            return result;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             result.put("success", false);
             result.put("message", "系统异常，请联系管理员");
             return result;
