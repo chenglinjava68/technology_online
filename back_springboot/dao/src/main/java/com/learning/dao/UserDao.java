@@ -17,7 +17,7 @@ public interface UserDao {
     根据ID查询
     {id} 要查询用户的 id
      */
-    User getUserByID(int id);
+    User getUserByID(String userName);
     /*
     根据用户名和密码查询
     {userName} 要查询用户的名称
