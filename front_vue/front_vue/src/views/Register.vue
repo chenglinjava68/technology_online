@@ -4,19 +4,22 @@
       <Logo/>
       <div class="background">
         <h3 class="title">用户注册</h3>
+        <el-upload
+          class="avatar-uploader"
+          ref="upload"
+          name="smfile"
+          action="/sm.ms/upload"
+          :show-file-list="false"
+          :on-change="imgPreview"
+          :on-success="uploadSuccess"
+          :on-error="uploadError"
+          :before-upload="beforeUpload"
+          :auto-upload="false">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-user avatar-uploader-icon"></i>
+          <div slot="tip" class="el-upload__tip"><span style="color: red">*</span>请点击上传jpg/png文件，且不超过2M</div>
+        </el-upload>
         <el-form class="ms-content" :model="user" :rules="rules" ref="user" v-loading="loading">
-          <el-form-item>
-            <el-upload
-              class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-change="imgPreview"
-              :auto-upload="false">
-              <img v-if="user.picUrl" :src="user.picUrl" class="avatar">
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-          </el-form-item>
           <el-form-item prop="userName">
             <el-input v-model="user.userName" placeholder="用户名">
               <el-button slot="prepend" icon="el-icon-user" ></el-button>
@@ -93,7 +96,9 @@
           userMail: '',
           userPhone: '',
           picUrl:'',
+          delpicUrl:'',
         },
+        imageUrl: '',
         loading: false,
         rules:{
           userName: [
@@ -130,7 +135,7 @@
         let fileName = file.name;
         let regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
         if (regex.test(fileName.toLowerCase ())) {
-          this.user.picUrl = URL.createObjectURL(file.raw);
+          this.imageUrl = URL.createObjectURL(file.raw);
         } else {
           this.$message.error('请选择图片文件');
         }
@@ -139,24 +144,52 @@
         this.$refs.user.validate((valid) => {
           //代表通过验证 ,将参数传回后台
           if (valid){
-            this.loading=true;
-            let params = Object.assign({}, this.user);
-            this.$post("/user/registerUser",params)
-              .then((result) => {
-                if (result.success) {
-                  this.$message.success(result.message);
-                  this.$router.push({name:'Login'})
-                }else{
-                  this.$message.error(result.message);
-                }
-                this.loading=false;
-              })
-              .catch((error) => {
-                this.$message.error("后端异常，请联系管理员");
-                this.loading=false;
-              });
+            this.$refs.upload.submit();
             }
         });
+      },
+      uploadSuccess(res, file) {
+        if(res.code == 'success'){
+          this.user.picUrl = res.data.url;
+          this.user.delpicUrl = res.data.delete;
+          this.loading=true;
+          let params = Object.assign({}, this.user);
+          this.$post("/user/registerUser",params)
+            .then((result) => {
+              if (result.success) {
+                this.$message.success(result.message);
+                this.$router.push({name:'Login'})
+              }else{
+                this.$message.error(result.message);
+              }
+              this.loading=false;
+            })
+            .catch((error) => {
+              this.$message.error("后端异常，请联系管理员");
+              this.loading=false;
+            });
+        }else {
+          this.$message.error("图片上传异常，请更换图片或联系管理员");
+          this.loading=false;
+        }
+      },
+      uploadError(res, file) {
+        this.$message.error("图片上传异常，请更换图片或联系管理员");
+        this.loading=false;
+      },
+      beforeUpload(file){
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        const fileName = file.name;
+        let regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        const hasFIle=regex.test(fileName.toLowerCase ())
+        if (!hasFIle) {
+          this.$message.error('请选择图片文件');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        console.log(isLt2M && hasFIle);
+        return  isLt2M && hasFIle;
       }
     }
   }
@@ -207,6 +240,7 @@
     text-align: center;
   }
   .avatar {
+    margin-top: 10px;
     width: 90px;
     height: 90px;
     display: block;

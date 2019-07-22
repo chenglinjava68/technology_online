@@ -19,6 +19,13 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
+      },
+      '/sm.ms': {
+        target: 'https://sm.ms/api',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/sm.ms': ''
+        }
       }
     },
     // Various Dev Server settings
