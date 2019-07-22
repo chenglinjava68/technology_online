@@ -95,8 +95,9 @@
           rePassword: '',
           userMail: '',
           userPhone: '',
-          picUrl:'',
-          delpicUrl:'',
+          picName:'',
+          userPicUrl:'',
+          userPicDelUrl:'',
         },
         imageUrl: '',
         loading: false,
@@ -150,8 +151,9 @@
       },
       uploadSuccess(res, file) {
         if(res.code == 'success'){
-          this.user.picUrl = res.data.url;
-          this.user.delpicUrl = res.data.delete;
+          this.user.userPicUrl = res.data.url;
+          this.user.userPicDelUrl = res.data.delete;
+          this.user.picName = res.data.filename;
           this.loading=true;
           let params = Object.assign({}, this.user);
           this.$post("/user/registerUser",params)

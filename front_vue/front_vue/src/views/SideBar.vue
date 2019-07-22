@@ -16,26 +16,33 @@
 </template>
 
 <script>
-    export default {
-      name: "SideBar",
-      data() {
-        return {
-          collapse:false,
-          items: [
-            {
-              icon: 'el-icon-lx-home',
-              index: 'dashboard',
-              title: '系统首页'
-            },
-            {
-              icon: 'el-icon-lx-cascades',
-              index: 'table',
-              title: '基础表格'
-            },
-        ]
-        }
+  import { EventBus } from '../assets/js/bus';
+  export default {
+    name: "SideBar",
+    data() {
+      return {
+        collapse:false,
+        items: [
+          {
+            icon: 'el-icon-house',
+            index: 'dashboard',
+            title: '系统首页'
+          },
+          {
+            icon: 'el-icon-tickets',
+            index: 'table',
+            title: '基础表格'
+          },
+      ]
       }
-    }
+    },
+    created(){
+      // 通过 Event Bus 进行组件间通信，来折叠侧边栏
+      EventBus.$on('collapse', msg => {
+        this.collapse = msg;
+      })
+    },
+  }
 </script>
 
 <style scoped>

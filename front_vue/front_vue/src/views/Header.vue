@@ -1,6 +1,6 @@
 <template>
   <div class="home-header">
-    <div class="collapse-btn">
+    <div class="collapse-btn" @click="collapseChange">
       <i class="el-icon-menu"></i>
     </div>
     <div class="header-logo">技术支撑管理系统</div>
@@ -44,6 +44,7 @@
 
 <script>
   import Logo from '@/components/logo'
+  import { EventBus } from '../assets/js/bus';
   export default {
     name: "Header",
     components:{
@@ -56,12 +57,17 @@
       return{
         fullscreen:false,
         readAll:false,
+        collapse: false,
         message: '',
         username:'',
         avater_pic:require('@/assets/img/user.png'),
       }
     },
     methods:{
+      collapseChange() {
+        this.collapse = !this.collapse;
+        EventBus.$emit('collapse', this.collapse);
+      },
       handleCommand(command){
         if (command == 'loginOut'){
           sessionStorage.removeItem('access-token');
@@ -96,7 +102,12 @@
         }
         this.fullscreen = !this.fullscreen;
       }
-    }
+    },
+    mounted: function(){
+      if(document.body.clientWidth < 1500){
+        this.collapseChange();
+      }
+    },
   }
 </script>
 
