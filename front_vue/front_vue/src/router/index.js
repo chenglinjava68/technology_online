@@ -23,7 +23,7 @@ export default new Router({
       component: resolve => require(['@/views/Register.vue'], resolve)
     },
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
       component: resolve => require(['@/views/Home.vue'], resolve),
       meta: { title: '基础平台' },
