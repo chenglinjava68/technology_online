@@ -13,6 +13,12 @@ export default new Router({
       }
     },
     {
+      path: '/',
+      name: 'Home',
+      component: resolve => require(['@/views/Home.vue'], resolve),
+      meta: { title: '基础平台' },
+    },
+    {
       path: '/login',
       name: 'Login',
       component: resolve => require(['@/views/Login.vue'], resolve)
@@ -21,12 +27,6 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: resolve => require(['@/views/Register.vue'], resolve)
-    },
-    {
-      path: '/',
-      name: 'Home',
-      component: resolve => require(['@/views/Home.vue'], resolve),
-      meta: { title: '基础平台' },
     },
     {
       path:'*',
