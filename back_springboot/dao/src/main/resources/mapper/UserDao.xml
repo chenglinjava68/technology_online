@@ -5,7 +5,7 @@
 <mapper namespace="com.learning.dao.UserDao">
     <!-- 填写数据库里实例User对应的表的表名 -->
     <!-- 这里是作为一个变量使用 -->
-    <sql id="table">user</sql>
+    <sql id="table">t_user</sql>
 
     <resultMap type="com.learning.model.User" id="User">
         <id column="id" property="id"/>
