@@ -1,8 +1,11 @@
 <template>
   <div class="tags" >
     <ul>
-      <li v-for="(item,index) in tagsList">
-
+      <li v-for="(item,index) in tagsList" :class="{'active': isActive(item.path)}" :key="index">
+        <router-link :to="item.path" class="tags-li-title">
+          {{item.title}}
+        </router-link>
+        <span class="tags-li-icon" @click="closeTags(index)"><i class="el-icon-close"></i></span>
       </li>
       <div class="tags-close-box">
         <el-dropdown @command="handleCommand">
@@ -25,7 +28,7 @@
     name: "Tags",
     data() {
       return {
-        tagsList: []
+        tagsList: [{path:"112",title:"112"}]
       }
     },
     methods: {
@@ -48,6 +51,10 @@
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+  }
+  .tags li {
+    float: left;
+    
   }
   .tags-close-box {
     position: absolute;
