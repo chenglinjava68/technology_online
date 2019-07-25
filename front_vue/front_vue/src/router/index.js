@@ -22,7 +22,8 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     component: resolve => require(['@/views/Home.vue'], resolve),
     meta: { title: '基础平台' },
-    children: [{ path: 'dashboard', component: resolve => require(['@/views/NoFound.vue'], resolve) }]
+    children: [{ path: 'dashboard', component: resolve => require(['@/views/NoFound.vue'], resolve), meta: { title: '系统首页' }},
+      { path: 'dashboard1', component: resolve => require(['@/views/NoFound.vue'], resolve), meta: { title: '系统首页1' }}]
   },
 ]
 export const asyncRouterMap = [

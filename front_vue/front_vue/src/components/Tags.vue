@@ -1,5 +1,5 @@
 <template>
-  <div class="tags" >
+  <div class="tags" v-if="showTags">
     <ul>
       <li class="tags-li" v-for="(item,index) in tagsList" :class="{'active': isActive(item.path)}" :key="index">
         <router-link :to="item.path" class="tags-li-title">
@@ -28,7 +28,7 @@
     name: "Tags",
     data() {
       return {
-        tagsList: [{path:"/dashboard",title:"112"}]
+        tagsList: [{path:"/dashboard1",title:"112"}]
       }
     },
     methods: {
@@ -39,9 +39,12 @@
         command === 'other' ? this.closeOther() : this.closeAll();
       },
       closeTags(index){
+        //取出当前关闭的页面
         const delItem = this.tagsList.splice(index, 1)[0];
+        //删除后的index位置是否有内容，有取出，没有前移一个
         const item = this.tagsList[index] ? this.tagsList[index] : this.tagsList[index - 1];
         if (item) {
+          //关闭的是当前页面，跳转下一个标签页面，不是当前页不跳转
           delItem.path === this.$route.fullPath && this.$router.push(item.path);
         }else{
           this.$router.push('/');
@@ -59,7 +62,37 @@
         })
         this.tagsList = curItem;
       },
+      // 设置标签
+      setTags(route){
+        const isExist = this.tagsList.some(item =>{
+          return item.path === route.fullpath;
+        })
+        if(!isExist){
+          if(this.tagsList.length >= 8){
+            this.tagsList.shift();
+          }
+          this.tagsList.push({
+            title: route.meta.title,
+            path: route.fullPath,
+            name: route.matched[1].components.default.name
+          })
+        }
+        EventBus.$emit('tags', this.tagsList);
+      },
     },
+    computed: {
+      showTags() {
+        return this.tagsList.length > 0;
+      }
+    },
+    watch:{
+      $route(newValue, oldValue){
+        this.setTags(newValue);
+      }
+    },
+    created() {
+      this.setTags(this.$route);
+    }
   }
 </script>
 
