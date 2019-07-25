@@ -163,6 +163,11 @@
     width:40px;
     height:40px;
   }
+  .el-dropdown-link{
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+  }
   .el-dropdown-menu__item{
     text-align: center;
   }
