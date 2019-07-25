@@ -96,7 +96,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .tags {
     position: relative;
     height: 30px;
