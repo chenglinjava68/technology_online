@@ -1,5 +1,7 @@
 package com.learning.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
@@ -7,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@ApiModel("用户实体类")
 public class User {
     /*
             {id} 自增主键
@@ -18,6 +21,7 @@ public class User {
             {userPower} 用户权限
             {userStatus} 用户状态
          */
+    @ApiModelProperty("用户ID")
     private int id;
     @NotNull(message = "用户名不能为空")
     @Length(min = 3, max = 15, message = "姓名必须在3到15位之间")

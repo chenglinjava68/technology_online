@@ -3,6 +3,8 @@ package com.learning.controller;
 import com.learning.model.User;
 import com.learning.service.JwtToken;
 import com.learning.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -16,10 +18,12 @@ import java.util.Map;
 
 @RestController("UserController")
 @RequestMapping("/user")
+@Api(tags = "用户相关接口", description = "提供用户相关的 RESTful APIs")
 public class UserController {
     @Autowired
     UserService userService;
 
+    @ApiOperation("用户注册接口")
     @PostMapping("/registerUser")
     @CrossOrigin
     public Object registerUser(@Validated User user, BindingResult bindingResult) {
