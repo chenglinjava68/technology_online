@@ -9,6 +9,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+/**
+ * @author Jaywatson
+ * @version 1.0.0
+ * @ClassName User.java
+ * @Description TODO
+ * @createTime 2019年07月28日 23:39:00
+ */
 @ApiModel("用户实体类")
 public class User {
     /*
@@ -21,27 +28,35 @@ public class User {
             {userPower} 用户权限
             {userStatus} 用户状态
          */
-    @ApiModelProperty("用户ID")
+    @ApiModelProperty(value = "用户ID", name = "id",dataType = "int", example = "1")
     private int id;
     @NotNull(message = "用户名不能为空")
     @Length(min = 3, max = 15, message = "姓名必须在3到15位之间")
     @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "用户名存在非法的字符")
+    @ApiModelProperty(value = "用户名", name = "userName",dataType = "String", example = "admin")
     private String userName;
     @NotNull(message = "用户昵称不能为空")
     @Length(min = 3, max = 30, message = "姓名必须在3到30位之间")
     @Pattern(regexp = "^[\u4e00-\u9fa5a-z0-9_]+$", message = "用户昵称存在非法的字符")
+    @ApiModelProperty(value = "用户昵称", name = "userNickName",dataType = "String", example = "admin")
     private String userNickName;
     @NotNull(message = "密码不能为空")
+    @ApiModelProperty(value = "密码", name = "password",dataType = "String", example = "123456")
     private String password;
     @NotNull(message = "邮箱不能为空")
     @Email(message = "邮箱格式不正确")
+    @ApiModelProperty(value = "邮箱", name = "userMail",dataType = "String", example = "1@qq.com")
     private String userMail;
     @Pattern(regexp = "^1(3|4|5|6|7|8|9)\\d{9}$", message = "请输入正确的手机号")
+    @ApiModelProperty(value = "手机号", name = "userPhone",dataType = "String", example = "136000000")
     private String userPhone;
-    private int userPower;
+    @ApiModelProperty(value = "用户状态", name = "userStatus",dataType = "Boolean", example = "true")
     private boolean userStatus;
+    @ApiModelProperty(value = "头像名称", name = "picName",dataType = "String", example = "user")
     private String picName;
+    @ApiModelProperty(value = "头像图床地址", name = "userPicUrl",dataType = "String", example = "xxx")
     private String userPicUrl;
+    @ApiModelProperty(value = "头像删除地址", name = "userPicDelUrl",dataType = "String", example = "xxx")
     private String userPicDelUrl;
 
     public int getId() {
@@ -92,14 +107,6 @@ public class User {
         this.userPhone = userPhone;
     }
 
-    public int getUserPower() {
-        return userPower;
-    }
-
-    public void setUserPower(int userPower) {
-        this.userPower = userPower;
-    }
-
     public boolean isUserStatus() {
         return userStatus;
     }
@@ -141,7 +148,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", userMail='" + userMail + '\'' +
                 ", userPhone='" + userPhone + '\'' +
-                ", userPower=" + userPower +
                 ", userStatus=" + userStatus +
                 ", picName='" + picName + '\'' +
                 ", userPicUrl='" + userPicUrl + '\'' +

@@ -1,7 +1,7 @@
 package com.learning.controller;
 
 import com.learning.model.User;
-import com.learning.service.JwtToken;
+import com.learning.util.JwtToken;
 import com.learning.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 @RestController("UserController")
 @RequestMapping("/user")
-@Api(tags = "用户相关接口", description = "提供用户相关的 RESTful APIs")
+@Api(tags = "用户相关接口", description = "提供用户相关的 RESTful APIs",value = "userController")
 public class UserController {
     @Autowired
     UserService userService;
@@ -44,7 +44,6 @@ public class UserController {
                     result.put("message", "用户昵称已存在");
                     return result;
                 } else {
-                    user.setUserPower(1);
                     user.setUserStatus(true);
                     userService.newUser(user);
                     result.put("success", true);
@@ -59,6 +58,7 @@ public class UserController {
         }
     }
 
+    @ApiOperation("用户注册接口")
     @PostMapping("/Login")
     @CrossOrigin
     public Object Login(User user) {
