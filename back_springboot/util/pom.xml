@@ -9,19 +9,19 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath><!-- lookup parent from repository -->
     </parent>
-    <!--service 模块 pom.xml-->
+    <!--util 模块 pom.xml-->
     <groupId>com.learning</groupId>
-    <artifactId>service</artifactId>
+    <artifactId>util</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>service</name>
-    <description>处理业务逻辑</description>
-    <!-- 配置信息 -->
+    <name>util</name>
+    <description>工具类</description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
-    <!-- 引用 -->
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,18 +36,9 @@
         <!-- 引用dao -->
         <dependency>
             <groupId>com.learning</groupId>
-            <artifactId>dao</artifactId>
+            <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <!-- 引用util -->
-        <dependency>
-            <groupId>com.learning</groupId>
-            <artifactId>util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
-
 </project>

@@ -1,4 +1,4 @@
-package com.learning.service;
+package com.learning.util;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -13,8 +13,12 @@ import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 
 
-/*
- * AES对称加密和解密
+/**
+ * @author Jaywatson
+ * @version 1.0.0
+ * @ClassName EncodeAndDecode.java
+ * @Description TODO
+ * @createTime 2019年07月28日 23:39:00
  */
 public class EncodeAndDecode {
     /*
