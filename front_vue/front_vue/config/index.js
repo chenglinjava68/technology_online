@@ -14,7 +14,7 @@ module.exports = {
       // 所有以/api 为前缀的请求将被代理到http://jsonplaceholder.typicode.com
       // 即 /api/getNav -> http://jsonplaceholder.typicode.com/getNav
       '/api': {
-        target: 'http://jsonplaceholder.typicode.com',
+        target: 'http://127.0.0.1:14520',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

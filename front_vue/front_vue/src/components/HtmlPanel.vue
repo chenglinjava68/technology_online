@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <mu-circular-progress :size="40" v-if="loading"/>
-    <div v-html="html"></div>
-  </div>
+    <div v-html="html" class="html-Panel"></div>
 </template>
 
 <script>
@@ -17,32 +14,34 @@
       },
       data(){
         return{
-          loading:false,
+          fullscreenLoading:false,
           html:''
         }
       },
       watch:{
-
+        url(value){
+          this.load(value)
+        }
       },
       mounted() {
-
+        this.load(this.url)
       },
       methods:{
           load(url){
             if (url && url.length > 0){
               //加载中
-              this.loading = true
+              this.fullscreenLoading = true
               let param ={
                 accept: 'text/html, text/plain'
               }
-              this.$http.get(url,parm).then((response) => {
-                this.loading = false
+              this.$http.get(url, param).then((response) => {
+                this.fullscreenLoading = false
                 // 处理HTML显示
                 this.html = response.data
-              }).catch(
-                this.loading = false
+              }).catch(() => {
+                this.fullscreenLoading = false
                 this.html = '加载失败,请确认网络状态'
-              )
+              })
             }
           }
       }
@@ -50,5 +49,8 @@
 </script>
 
 <style scoped>
-
+.html-Panel{
+  width: 100%;
+  height: 100%;
+}
 </style>

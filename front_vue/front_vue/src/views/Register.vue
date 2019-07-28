@@ -190,7 +190,6 @@
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
-        console.log(isLt2M && hasFIle);
         return  isLt2M && hasFIle;
       }
     }

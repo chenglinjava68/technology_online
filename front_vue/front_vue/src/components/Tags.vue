@@ -64,7 +64,6 @@
       },
       // 设置标签
       setTags(route){
-        debugger
         const isExist = this.tagsList.some(item =>{
           return item.path === route.fullPath;
         })
