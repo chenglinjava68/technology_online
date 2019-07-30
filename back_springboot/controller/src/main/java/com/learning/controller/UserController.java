@@ -1,10 +1,14 @@
 package com.learning.controller;
 
+import com.learning.model.ResponseBean;
 import com.learning.model.User;
+import com.learning.model.enums.ResponseEnums;
 import com.learning.util.JwtToken;
 import com.learning.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +29,8 @@ public class UserController {
 
     @ApiOperation("用户注册接口")
     @PostMapping("/registerUser")
+    @ApiResponses( value = {
+            @ApiResponse( code = 200, message = "成功", response = ResponseBean.class, responseContainer = "json" ) } )
     @CrossOrigin
     public Object registerUser(@Validated User user, BindingResult bindingResult) {
         Map<String, Object> result = new HashMap<String, Object>();
@@ -36,19 +42,16 @@ public class UserController {
         } else {
             try {
                 if (userService.getUserNameCount(user.getUserName()) != 0) {
-                    result.put("success", false);
-                    result.put("message", "用户名已存在");
-                    return result;
+                    ResponseBean responseBean=new ResponseBean(false,ResponseEnums.USER_NAME_EXIST);
+                    return responseBean;
                 } else if (userService.getUserNickNameCount(user.getUserNickName()) != 0) {
-                    result.put("success", false);
-                    result.put("message", "用户昵称已存在");
-                    return result;
+                    ResponseBean responseBean=new ResponseBean(false,ResponseEnums.USER_NICKNAME_EXIST);
+                    return responseBean;
                 } else {
                     user.setUserStatus(true);
                     userService.newUser(user);
-                    result.put("success", true);
-                    result.put("message", "新增用户成功");
-                    return result;
+                    ResponseBean responseBean=new ResponseBean(false,ResponseEnums.SUCCESS);
+                    return responseBean;
                 }
             } catch (Exception e) {
                 result.put("success", false);
@@ -58,8 +61,10 @@ public class UserController {
         }
     }
 
-    @ApiOperation("用户注册接口")
+    @ApiOperation("用户登陆接口")
     @PostMapping("/Login")
+    @ApiResponses( value = {
+            @ApiResponse( code = 200, message = "成功", response = ResponseBean.class, responseContainer = "json" ) } )
     @CrossOrigin
     public Object Login(User user) {
         Map<String, Object> result = new HashMap<String, Object>();
