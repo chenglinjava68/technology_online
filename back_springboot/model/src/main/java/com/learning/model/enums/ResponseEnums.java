@@ -13,6 +13,7 @@ public enum ResponseEnums {
 
     /* 服务器错误 */
     SEVER_ERROR("00001","服务器异常"),
+    MYBATIS_ERROR("00002","Mybatis未绑定"),
 
     /* 参数错误：10001-19999 */
     PARAM_ILLAGLE("10001", "参数无效"),
@@ -38,7 +39,7 @@ public enum ResponseEnums {
     DATA_NO_RECORD("50001", "数据未找到"),
     DATA_ERROR("50002", "数据有误"),
     DATA_EXIST("50003", "数据已存在"),
-    DATABASE_ERROR("50004","查询出错"),
+    DATABASE_ERROR("50004","数据库异常"),
 
     /* 接口错误：60001-69999 */
     API_INSIDE_ERROR("60001", "内部系统接口调用异常"),
