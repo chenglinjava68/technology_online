@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
@@ -114,5 +115,4 @@ public class SpringExceptionHandle {
         logger.error("occurs error when execute method ,message {}",e.getMessage());
         return new ResponseBean<>(false, ResponseEnums.API_FOBBIDEN);
     }
-
 }
