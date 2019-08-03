@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.BindException;
 import java.net.ConnectException;
 import java.sql.SQLException;
 
@@ -33,10 +32,10 @@ public class SpringExceptionHandle {
      * @param e
      * @return
      */
-    @ExceptionHandler(value={BindException.class})
+    @ExceptionHandler(value={java.net.BindException.class})
     @ResponseBody
     @ResponseStatus(value= HttpStatus.BAD_REQUEST)
-    public ResponseBean<String> badRequest(BindException e){
+    public ResponseBean<String> badRequest(java.net.BindException e){
         logger.error("occurs error when execute method ,message {}",e.getMessage());
         return new ResponseBean<>(false, ResponseEnums.PARAM_ILLAGLE);
     }
@@ -49,7 +48,7 @@ public class SpringExceptionHandle {
     @ExceptionHandler(value={NoHandlerFoundException.class})
     @ResponseBody
     @ResponseStatus(value=HttpStatus.NOT_FOUND)
-    public ResponseBean<String> badRequestNotFound(BindException e){
+    public ResponseBean<String> badRequestNotFound(NoHandlerFoundException e){
         logger.error("occurs error when execute method ,message {}",e.getMessage());
         return new ResponseBean<>(false,null, ResponseEnums.API_ADDRESS_INVALID);
     }
@@ -95,6 +94,7 @@ public class SpringExceptionHandle {
         logger.error("occurs error when execute method ,message {}",e.getMessage());
         return new ResponseBean<>(false, ResponseEnums.DATABASE_ERROR);
     }
+
     /**
      * 网络连接失败！
      * @param e
@@ -108,11 +108,30 @@ public class SpringExceptionHandle {
         return new ResponseBean<>(false, ResponseEnums.API_OUTSIDE_ERROR);
     }
 
+    /**
+     * 参数校验不通过
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value={org.springframework.validation.BindException.class})
+    @ResponseBody
+    @ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseBean<String> connect(org.springframework.validation.BindException e){
+        logger.error("occurs error when execute method ,message {}",e.getMessage());
+        return new ResponseBean<>(false, ResponseEnums.PARAM_VALID_FAIL);
+    }
+
+    /**
+     * 通用异常封装
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value={Exception.class})
     @ResponseBody
     @ResponseStatus(value=HttpStatus.METHOD_NOT_ALLOWED)
     public ResponseBean<String> notAllowed(Exception e){
         logger.error("occurs error when execute method ,message {}",e.getMessage());
-        return new ResponseBean<>(false, ResponseEnums.API_FOBBIDEN);
+        return new ResponseBean<>(false, ResponseEnums.METHOD_NOT_ALLOWED);
     }
+
 }

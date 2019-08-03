@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel("封装异常响应类")
 public class ResponseRuntimeException extends RuntimeException{
     private static final long serialVersionUID = 1L;
-    @ApiModelProperty(value = "token", name = "token",dataType = "String", example = "xxx")
+    @ApiModelProperty(value = "code", name = "code",dataType = "String", example = "xxx")
     protected String code;
-    @ApiModelProperty(value = "token", name = "token",dataType = "String", example = "xxx")
+    @ApiModelProperty(value = "信息", name = "msg",dataType = "String", example = "xxx")
     protected String msg;
     @ApiModelProperty(value = "日志信息", name = "logo",dataType = "String", example = "xxx")
     protected String logo;

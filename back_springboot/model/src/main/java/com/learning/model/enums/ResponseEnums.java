@@ -17,9 +17,7 @@ public enum ResponseEnums {
 
     /* 参数错误：10001-19999 */
     PARAM_ILLAGLE("10001", "参数无效"),
-    PARAM_NULL("10002", "参数为空"),
-    PARAM_TYPE_ERROR("10003", "参数类型错误"),
-    PARAM_MISSING("10004", "参数缺失"),
+    PARAM_VALID_FAIL("10002", "参数校验不通过"),
 
     /* 用户错误：20001-29999*/
     USER_UNLOGIN("20001", "用户未登录"),

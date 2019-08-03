@@ -32,34 +32,26 @@ public class UserController {
     @ApiResponses( value = {
             @ApiResponse( code = 200, message = "成功", response = ResponseBean.class, responseContainer = "json" ) } )
     @CrossOrigin
-    public Object registerUser(@Validated User user, BindingResult bindingResult) {
+    public Object registerUser(@Validated User user) {
         Map<String, Object> result = new HashMap<String, Object>();
-        if (bindingResult.hasErrors()) {
-            String errorMsg = bindingResult.getFieldError().getDefaultMessage();
-            result.put("success", false);
-            result.put("message", errorMsg);
-            return result;
-        } else {
-            try {
-                if (userService.getUserNameCount(user.getUserName()) != 0) {
-                    ResponseBean responseBean=new ResponseBean(false,ResponseEnums.USER_NAME_EXIST);
-                    return responseBean;
-                } else if (userService.getUserNickNameCount(user.getUserNickName()) != 0) {
-                    ResponseBean responseBean=new ResponseBean(false,ResponseEnums.USER_NICKNAME_EXIST);
-                    return responseBean;
-                } else {
-                    user.setUserStatus(true);
-                    userService.newUser(user);
-                    ResponseBean responseBean=new ResponseBean(false,ResponseEnums.SUCCESS);
-                    return responseBean;
-                }
-            } catch (Exception e) {
-                result.put("success", false);
-                result.put("message", "用户新增异常，请稍后重试");
-                return result;
+        try {
+            if (userService.getUserNameCount(user.getUserName()) != 0) {
+                ResponseBean responseBean=new ResponseBean(false,ResponseEnums.USER_NAME_EXIST);
+                return responseBean;
+            } else if (userService.getUserNickNameCount(user.getUserNickName()) != 0) {
+                ResponseBean responseBean=new ResponseBean(false,ResponseEnums.USER_NICKNAME_EXIST);
+                return responseBean;
+            } else {
+                user.setUserStatus(true);
+                userService.newUser(user);
+                ResponseBean responseBean=new ResponseBean(false,ResponseEnums.SUCCESS);
+                return responseBean;
             }
+        } catch (Exception e) {
+            return new ResponseBean<>(false, ResponseEnums.SEVER_ERROR);
         }
     }
+
 
     @ApiOperation("用户登陆接口")
     @PostMapping("/Login")
@@ -73,19 +65,13 @@ public class UserController {
            String password = user.getPassword();
            User userCheck = userService.getUserByName(userName, password);
            if (userCheck == null){
-               result.put("success", false);
-               result.put("message", "用户名或密码错误，如无错误，该用户或被注销，请重试");
+               return new ResponseBean<>(false, ResponseEnums.USER_FAIL);
            }else {
                String Usertoken = JwtToken.sign(userName,password);
-               result.put("success", true);
-               result.put("message", "登录成功");
-               result.put("token", Usertoken);
+               return new ResponseBean<>(true,Usertoken,ResponseEnums.SUCCESS);
            }
-           return result;
         } catch (Exception e) {
-            result.put("success", false);
-            result.put("message", "系统异常，请联系管理员");
-            return result;
+            return new ResponseBean<>(false, ResponseEnums.SEVER_ERROR);
         }
     }
 }
