@@ -6,8 +6,9 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import './assets/iconfont/iconfont.css';
 import './assets/css/icon.css';
-import {post,get,patch,put} from './axios.js';
+import {post,get,patch,put} from './util/axios.js';
 Vue.prototype.$post=post;
 Vue.prototype.$get=get;
 Vue.prototype.$patch=patch;

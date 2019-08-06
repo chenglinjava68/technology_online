@@ -1,7 +1,7 @@
 <template>
   <div class="home-header">
     <div class="collapse-btn" @click="collapseChange">
-      <i class="el-icon-menu"></i>
+      <i class="iconfont iconall"></i>
     </div>
     <div class="header-logo">技术支撑管理系统</div>
     <div class="header-right">
