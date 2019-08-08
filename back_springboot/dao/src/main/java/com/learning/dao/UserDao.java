@@ -1,5 +1,5 @@
 package com.learning.dao;
-import com.learning.model.User;
+import com.learning.model.User.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

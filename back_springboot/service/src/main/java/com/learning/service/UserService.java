@@ -1,6 +1,6 @@
 package com.learning.service;
 import com.learning.dao.UserDao;
-import com.learning.model.User;
+import com.learning.model.User.User;
 import com.learning.util.EncodeAndDecode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

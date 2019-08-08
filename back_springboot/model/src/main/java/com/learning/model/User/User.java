@@ -1,4 +1,4 @@
-package com.learning.model;
+package com.learning.model.User;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -62,83 +62,63 @@ public class User {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getUserName() {
         return userName;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
     public String getUserNickName() {
         return userNickName;
     }
-
     public void setUserNickName(String userNickName) {
         this.userNickName = userNickName;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public String getUserMail() {
         return userMail;
     }
-
     public void setUserMail(String userMail) {
         this.userMail = userMail;
     }
-
     public String getUserPhone() {
         return userPhone;
     }
-
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
-
     public boolean isUserStatus() {
         return userStatus;
     }
-
     public void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
     }
-
     public String getPicName() {
         return picName;
     }
-
     public void setPicName(String picName) {
         this.picName = picName;
     }
-
     public String getUserPicUrl() {
         return userPicUrl;
     }
-
     public void setUserPicUrl(String userPicUrl) {
         this.userPicUrl = userPicUrl;
     }
-
     public String getUserPicDelUrl() {
         return userPicDelUrl;
     }
-
     public void setUserPicDelUrl(String userPicDelUrl) {
         this.userPicDelUrl = userPicDelUrl;
     }
-
     @Override
     public String toString() {
         return "User{" +

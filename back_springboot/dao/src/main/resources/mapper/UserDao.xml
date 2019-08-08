@@ -7,7 +7,7 @@
     <!-- 这里是作为一个变量使用 -->
     <sql id="table">t_user</sql>
 
-    <resultMap type="com.learning.model.User" id="User">
+    <resultMap type="com.learning.model.User.User" id="User">
         <id column="id" property="id"/>
         <result column="user_name" property="userName"/>
         <result column="user_nick_name" property="userNickName"/>
@@ -68,7 +68,7 @@
     </select>
 
     <!-- 增 -->
-    <insert id="newUser" parameterType="com.learning.model.User">
+    <insert id="newUser" parameterType="com.learning.model.User.User">
         INSERT INTO
         <include refid="table"/>
         (user_name,user_nick_name,password,pic_name,user_pic_url,pic_del_url,user_mail,user_phone,user_power,user_status)
