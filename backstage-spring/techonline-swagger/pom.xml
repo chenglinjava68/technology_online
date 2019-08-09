@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.learning</groupId>
-    <artifactId>techonline-booter</artifactId>
+    <artifactId>techonline-swagger</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>techonline-booter</name>
-    <description>项目整体启动类</description>
+    <name>techonline-swagger</name>
+    <description>swagger接口文档工具</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,28 +33,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!--依赖组件引入-->
-        <dependency>
-            <groupId>com.learning</groupId>
-            <artifactId>techonline-swagger</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.learning</groupId>
-            <artifactId>techonline-authority</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

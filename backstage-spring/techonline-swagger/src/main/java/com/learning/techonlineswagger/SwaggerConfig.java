@@ -1,5 +1,6 @@
-package com.learning.controller;
+package com.learning.techonlineswagger;
 
+import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,26 +16,28 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
+@EnableSwaggerBootstrapUI
 public class SwaggerConfig {
-    @Bean
+
+    @Bean(value = "defaultApi")
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select() // 选择那些路径和api会生成document
-                .apis(RequestHandlerSelectors.any())// 对所有api进行监控
+                // 对指定api进行监控
+                .apis(RequestHandlerSelectors.basePackage("com.learning.techonlineauthority.controller"))
                 //不显示错误和测试的接口地址
-                .paths(Predicates.not(PathSelectors.regex("/error.*")))//错误路径不监控
-                .paths(Predicates.not(PathSelectors.regex("/test/showAll.*")))//测试路径不监控
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiInfo());
+                .apiInfo(apiInfo())
+                .groupName("通用权限框架接口");
     }
 
     private ApiInfo apiInfo(){
         return new ApiInfo(
-                "技术支撑平台RESTful APIs实例文档",
+                "技术支撑平台基础权限RESTful APIs实例文档",
                 "我的博客网站：http://www.nothingistrue.top，欢迎大家访问。",
                 "API V1.0",
-                "NO terms of service",
+                " 127.0.0.1:13520",
                 new Contact("JayWatson", "https://github.com/WatsonJay", "446725026@qq.com"),
                 "Apache", "http://www.apaJayWatsonche.org/", Collections.emptyList());
     }
