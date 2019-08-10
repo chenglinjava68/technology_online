@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 @Api(tags = "用户相关接口", description = "提供用户相关的 RESTful APIs",value = "UserController")
 public class UserController {
+
 }

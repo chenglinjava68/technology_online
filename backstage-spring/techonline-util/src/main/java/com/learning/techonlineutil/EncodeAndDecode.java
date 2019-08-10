@@ -11,6 +11,13 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * @author Jaywatson
+ * @version 1.0.0
+ * @ClassName EncodeAndDecode.java
+ * @Description TODO
+ * @createTime 2019年07月28日 23:39:00
+ */
 public class EncodeAndDecode {
     /*
      * 加密

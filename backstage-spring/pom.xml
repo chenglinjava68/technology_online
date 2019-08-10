@@ -58,6 +58,11 @@
             <artifactId>pagehelper</artifactId>
             <version>${pagehelper.version}</version>
         </dependency>
+        <!--&lt;!&ndash;JDBC&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-jdbc</artifactId>-->
+        <!--</dependency>-->
         <!--接口文档插件-->
         <dependency>
             <groupId>io.springfox</groupId>
