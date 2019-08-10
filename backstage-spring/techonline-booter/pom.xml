@@ -40,7 +40,7 @@
             <artifactId>techonline-swagger</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+        <!--依赖组件引入-->
         <dependency>
             <groupId>com.learning</groupId>
             <artifactId>techonline-authority</artifactId>
